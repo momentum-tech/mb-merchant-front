@@ -25,7 +25,7 @@ function getTop(documentId) {
 
 function processUserInfo(treeMenuInfo) {
 	var userInfoObj = getUserInfo();
-	drawUserInfo("云南省涉旅商户认证平台", userInfoObj, treeMenuInfo, "login.html")
+	drawUserInfo("云南省涉旅商户主管认证平台", userInfoObj, treeMenuInfo, "login.html")
 }
 
 
@@ -72,7 +72,7 @@ function drawUserInfo(title, userInfoObj, treeMenuInfo, loginPage) {
 	}
 }
 function queryUserBaseInfo(treeNodeId, userInfoObj) {
-	var url = getSvrAddress() + "queryUserBaseInfo.action?";
+	var url = getCommonSvrAddress() + "queryUserBaseInfo.action?";
 	url += "&userId=" + userInfoObj.userId + "&treeNodeId=" + treeNodeId;
 	
 	$.ajax({
@@ -133,11 +133,11 @@ function assembleRightTitle(title) {
 }
 
 function getSvrAddress() {
-	return "http://121.199.38.132:8113/";
+	return "http://111.231.201.90:8114/";
 }
 
 function getCommonSvrAddress() {
-	return "http://121.199.38.132:8112/";
+	return "http://111.231.201.90:8112/";
 }
 
 function getUserInfo() {

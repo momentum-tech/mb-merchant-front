@@ -75,7 +75,7 @@ function doLogin() {
 			jLoading.hideLoading();
 			if (data && data.isSuccess) {
 				if(localStorage) {
-					localStorage.setItem("ma-merchant.user", JSON.stringify(data.rtnObj));
+					localStorage.setItem("mb-merchant.user", JSON.stringify(data.rtnObj));
 					location.href = "main.html";
 				} else {
 					alert("您的浏览器无法支持,请下载IE8以上版本的浏览器");

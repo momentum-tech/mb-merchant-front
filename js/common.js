@@ -142,7 +142,7 @@ function getCommonSvrAddress() {
 
 function getUserInfo() {
 	if(localStorage) {
-		return JSON.parse(localStorage.getItem("ma-merchant.user"));
+		return JSON.parse(localStorage.getItem("mb-merchant.user"));
 	} else {
 		alert("您的浏览器无法支持,请下载IE8以上版本的浏览器");
 	}

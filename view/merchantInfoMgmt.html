@@ -72,8 +72,8 @@
 		
 		<div style="width:400px;height:45px;line-height:45px;margin:0 auto;">
 			<div style="width:120px;;height:40px;margin:0 auto;background:#43adf0;line-height:40px;color:#fff;font-size:15px;border-radius:5px;cursor:pointer;margin-top:15px;float:left;" onclick="javascript:history.go(-1)">返回</div>
-			<div style="width:120px;;height:40px;margin:0 auto;background:#46ca2c;line-height:40px;color:#fff;font-size:15px;border-radius:5px;cursor:pointer;margin-top:15px;float:left;margin-left:10px;" onclick="doMerchantAuth()">通过审核</div>
-			<div style="width:120px;;height:40px;margin:0 auto;background:#df2936;line-height:40px;color:#fff;font-size:15px;border-radius:5px;cursor:pointer;margin-top:15px;float:left;margin-left:10px;" onclick="doMerchantAuth()">拒绝</div>
+			<div style="width:120px;;height:40px;margin:0 auto;background:#46ca2c;line-height:40px;color:#fff;font-size:15px;border-radius:5px;cursor:pointer;margin-top:15px;float:left;margin-left:10px;" onclick="updateMerchantStatus(2, '确定要通过该商户的审核吗？')">通过审核</div>
+			<div style="width:120px;;height:40px;margin:0 auto;background:#df2936;line-height:40px;color:#fff;font-size:15px;border-radius:5px;cursor:pointer;margin-top:15px;float:left;margin-left:10px;" onclick="updateMerchantStatus(3, '确定要拒绝该商户的审核吗？')">拒绝</div>
 		</div>
 	</div>
 	
@@ -84,6 +84,7 @@
 var locationSearch = window.location.search;
 var paramInfos = locationSearch.substring(1, locationSearch.length);
 var merchantId;
+var taskId;
 
 var params = paramInfos.split("&");
 for(var i = 0; i < params.length; i++) {
@@ -95,6 +96,8 @@ for(var i = 0; i < params.length; i++) {
 			var value = keyValue[1];
 			if(key == 'merchantId') {
 				merchantId = value;
+			} else if(key == 'taskId') {
+				taskId = value;
 			}
 		}
 	}
@@ -147,6 +150,27 @@ function queryMerchantInfo() {
 			alert("网络异常:请稍后再试");
 		}
 	});
+}
+
+
+function updateMerchantStatus(comStat, message) {
+	if(confirm(message)){
+		var data = "recId=" + merchantId + "&taskId=" + taskId + "&comStat=" + comStat;
+		var url = getSvrAddress() + "v1/tasks/updateMerchantStatus.action";
+		
+		jLoading.showLoading();
+		
+		$.ajax({
+			type: "POST",
+			url:url,
+			data:data,
+			dataType:"json",
+			success: function(data) {
+				jLoading.hideLoading();
+				history.go(-1);
+			}
+		});
+	}
 }
 
 function assembleMerchantInfo(data) {

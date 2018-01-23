@@ -69,7 +69,7 @@ function queryMerchantInfos() {
 
 function merchantAuth(idx) {
 	var record = jlst.getJLstRowInfo(idx);
-	location.href = "merchantInfoMgmt.html?merchantId=" + record.main_id;
+	location.href = "merchantInfoMgmt.html?merchantId=" + record.main_id + "&taskId=" + record.rec_id;
 }
 
 function loadMerchantInfos(page, rows) {

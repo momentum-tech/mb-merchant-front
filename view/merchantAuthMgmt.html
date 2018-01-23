@@ -53,8 +53,8 @@ var jLoading = new JLoading();
 var tableHeight = document.body.clientHeight - 55 - 52 - 65 - 50;
 var lstInfo = {
 	id : "entityInfoLst",
-	titles: ["商户名称", "企业法人", "法人电话", "法人身份证", "诚信账号"],
-	keys: ["cpy_name", "cpy_legal_name", "legal_tel", "legal_id", "clr_act"],
+	titles: ["任务描述", "创建时间", "处理时间"],
+	keys: ["task_desc", "create_date", "begin_time"],
 	functionTitles:["认证商户"],
 	functions:[merchantAuth],
 	height:tableHeight,
@@ -67,17 +67,15 @@ function queryMerchantInfos() {
 	loadMerchantInfos(pageInfo.page, pageInfo.rows);
 }
 
-function merchantAuth() {
-	
+function merchantAuth(idx) {
+	var record = jlst.getJLstRowInfo(idx);
+	location.href = "merchantInfoMgmt.html?merchantId=" + record.main_id;
 }
 
 function loadMerchantInfos(page, rows) {
 	var data = "page=" + page + "&rows=" + rows;
-	var cpyName = $("#cpyName4Query").val();
-	if(cpyName != "") {
-		data += "&cpyName=" + cpyName;
-	}
-	var url = "http://localhost:8080/queryMerchantInfoLst.action?" + data;
+	data += "&userId=" + getUserInfo().userId;
+	var url = getSvrAddress() + "v1/tasks/queryTaskInfoLst.action?" + data;
 	
 	jLoading.showLoading();
 	

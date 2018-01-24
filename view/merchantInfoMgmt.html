@@ -156,7 +156,7 @@ function queryMerchantInfo() {
 function updateMerchantStatus(comStat, message) {
 	if(confirm(message)){
 		var data = "recId=" + merchantId + "&taskId=" + taskId + "&comStat=" + comStat;
-		var url = getSvrAddress() + "v1/tasks/updateMerchantStatus.action";
+		var url = getSvrAddress() + "/v1/merchants/updateMerchantStatus.action";
 		
 		jLoading.showLoading();
 		
